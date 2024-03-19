@@ -24,8 +24,8 @@ export default function Map() {
       // 식당 데이터 마커 띄우기
       stores?.["DATA"]?.map((store) => {
         var markerPosition = new window.kakao.maps.LatLng(
-          store?.y_dnts
-          store?.c_cnts
+          store?.y_dnts,
+          store?.x_cnts
         );
 
         // 마커를 생성합니다
