@@ -8,7 +8,9 @@ export default async function handler(
 ) {
   const prisma = new PrismaClient();
 
-  const stores = await prisma.store.findMany({});
+  const stores = await prisma.store.findMany({
+    orderBy: { id: "asc" },
+  });
   // const stores = (await import("../../data/store_data.json"))[
   //   "DATA"
   // ] as StoreType[];
