@@ -27,6 +27,9 @@ export async function getStaticProps() {
       revalidate: 60 * 60,
     };
   } catch (e) {
-    console.log(e);
+    return {
+      props: { stores: [] }, // 에러 발생 시 빈 배열을 반환하거나, 다른 적절한 값을 반환할 수 있습니다.
+      revalidate: 60 * 60,
+    };
   }
 }

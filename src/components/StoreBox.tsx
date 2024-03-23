@@ -8,6 +8,7 @@ import {
   AiOutlinePhone,
 } from "react-icons/ai";
 import { HiOutlineMapPin } from "react-icons/hi2";
+import { useRouter } from "next/router";
 
 interface StoreBoxProps {
   store: StoreType | null;
@@ -15,6 +16,7 @@ interface StoreBoxProps {
 }
 
 const StoreBox = ({ store, setStore }: StoreBoxProps) => {
+  const router = useRouter();
   return (
     <div className="fixed transition ease-in-out delay-150 inset-x-0 mx-auto bottom-20 rounded-lg shadow-lg max-w-sm md:max-w-xl z-10 w-full bg-white">
       {store && (
@@ -23,10 +25,14 @@ const StoreBox = ({ store, setStore }: StoreBoxProps) => {
             <div className="flex justify-between items-start">
               <div className="flex gap-4 items-center">
                 <Image
-                  src="/images/defalut.png"
-                  alt="defalut image"
-                  width={100}
-                  height={100}
+                  src={
+                    store?.category
+                      ? `/images/markers/${store?.category}.png`
+                      : "/images/markers/default.png"
+                  }
+                  width={40}
+                  height={40}
+                  alt="아이콘 이미지"
                 />
                 <div>
                   <div className="font-sembold">{store?.name}</div>
@@ -61,7 +67,7 @@ const StoreBox = ({ store, setStore }: StoreBoxProps) => {
           </div>
           <button
             type="button"
-            onClick={() => window.alert("상세보기 작업중")}
+            onClick={() => router.push(`/cafes/${store.id}`)}
             className="w-full bg-blue-700 hover:bg-ble-500 focus:bg-blue-500 py-3 text-white font-semibold rounded-b-lg"
           >
             상세보기
