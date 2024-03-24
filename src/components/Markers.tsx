@@ -32,6 +32,7 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
         // 마커를 생성합니다
         var marker = new window.kakao.maps.Marker({
           position: markerPosition,
+          image: markerImage, // 마커이미지 설정
         });
 
         // 마커가 지도 위에 표시되도록 설정합니다

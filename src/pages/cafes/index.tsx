@@ -12,18 +12,20 @@ const CafeListPage = () => {
   const router = useRouter();
   const { page = "1" }: any = router.query;
   console.log(page);
+
   const {
     data: stores,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: [`stores-${page}`],
+    queryKey: ["stores", page],
     queryFn: async () => {
       const { data } = await axios(`api/stores?page=${page}`);
       return data as StoreApiResponse;
     },
   });
   console.log(stores);
+
   if (isError) {
     return (
       <div className="w-full h-screen mx-auto pt-[30%] text-red-500 text-center font-semibold">
@@ -42,7 +44,11 @@ const CafeListPage = () => {
             <li className="flex justify-between gap-x-6 py-5" key={index}>
               <div className="flex gap-x-4">
                 <Image
-                  src="/images/defalut.png"
+                  src={
+                    store?.category
+                      ? `/images/markers/${store?.category}.png`
+                      : `/images/markers/default.png`
+                  }
                   alt="default image"
                   width={48}
                   height={48}
