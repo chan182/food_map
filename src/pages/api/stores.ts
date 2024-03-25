@@ -25,6 +25,8 @@ export default async function handler(
     return res.status(200).json(result);
   } else {
     // GET 요청 처리
+
+    // [카페목록] pagination 적용
     if (page) {
       const count = await prisma.store.count();
       const skipPage = parseInt(page) - 1;

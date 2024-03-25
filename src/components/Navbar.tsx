@@ -9,7 +9,7 @@ const Navbar = () => {
     <>
       <div className="navbar">
         <Link href={"/"} className="navbar__logo">
-          YourCofes
+          YourFood
         </Link>
         <div className="navbar__list">
           <Link href="/cafes" className="navbar__list--item">

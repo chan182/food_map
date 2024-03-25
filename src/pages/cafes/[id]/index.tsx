@@ -4,13 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { StoreType } from "@/interface";
 import axios from "axios";
 import Loader from "@/components/Loader";
-import Loading from "@/components/Loading";
-import Image from "next/image";
 import Map from "@/components/Map";
 import Marker from "@/components/Marker";
 
 const CafeDetail = () => {
-  const [map, setMap] = useState(null);
   const router = useRouter();
   const { id } = router.query;
   console.log();
@@ -115,8 +112,8 @@ const CafeDetail = () => {
       </div>
       {isSuccess && (
         <div className="overflow-hidden w-full mb-20 max-w-5xl mx-auto max-h-[600px]">
-          <Map setMap={setMap} lat={store?.lat} lng={store?.lng} zoom={1} />
-          <Marker map={map} store={store} />
+          <Map lat={store?.lat} lng={store?.lng} zoom={1} />
+          <Marker store={store} />
         </div>
       )}
     </>

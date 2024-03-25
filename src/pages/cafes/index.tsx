@@ -1,18 +1,27 @@
 import { StoreApiResponse, StoreType } from "@/interface";
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
-
+import SearchFilter from "@/components/SearchFilter";
 import Pagination from "@/components/Pagination";
+import { searchState } from "@/atom";
+import { useRecoilValue } from "recoil";
 
 const CafeListPage = () => {
   const router = useRouter();
-  const { page = "1" }: any = router.query;
-  console.log(page);
+  const ref = useRef<HTMLDivElement | null>(null);
+  // const isPageEnd = !!pageRef?.isInteresting;
+  const searchValue = useRecoilValue(searchState);
 
+  const searchParmas = {
+    q: searchValue?.q,
+    district: searchValue?.district,
+  };
+
+  const { page = "1" }: any = router.query;
   const {
     data: stores,
     isLoading,
@@ -24,7 +33,6 @@ const CafeListPage = () => {
       return data as StoreApiResponse;
     },
   });
-  console.log(stores);
 
   if (isError) {
     return (
@@ -36,12 +44,19 @@ const CafeListPage = () => {
 
   return (
     <div className="px-4 md:max-w-5xl mx-auto py-8">
+      <SearchFilter />
       <ul role="list" className="divide-y divde-gray-100">
         {isLoading ? (
           <Loading />
         ) : (
           stores?.data?.map((store, index) => (
-            <li className="flex justify-between gap-x-6 py-5" key={index}>
+            <li
+              className="flex justify-between gap-x-6 py-5 cursor-pointer hover:bg-gray-50"
+              key={index}
+              onClick={() => {
+                router.push(`cafes/${store.id}`);
+              }}
+            >
               <div className="flex gap-x-4">
                 <Image
                   src={

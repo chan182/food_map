@@ -1,3 +1,5 @@
+import { atom } from "recoil";
+
 export interface StoreType {
   id: number;
   phone?: string | null;
@@ -15,4 +17,15 @@ export interface StoreApiResponse {
   totalPage?: number;
   totalCount?: number;
   page?: number;
+}
+
+export interface LocationType {
+  lat?: string | null;
+  lng?: string | null;
+  zoom: number;
+}
+
+export interface SearchType {
+  q?: string;
+  district?: string;
 }
